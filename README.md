@@ -30,14 +30,14 @@ L’application permet de gérer des forfaits touristiques grâce à un système
 
 ## Fonctionnalités
 
-- ➕ Ajouter un forfait
-- 📋 Afficher les forfaits
-- ✏️ Modifier un forfait
-- 🗑️ Supprimer un forfait
-- 🔄 Navigation sans rechargement (SPA)
-- 🖼️ Affichage dynamique des images
-- ❌ Messages d’erreur et de succès avec fermeture
-- 📱 Interface responsive
+- Ajouter un forfait
+- Afficher les forfaits
+- Modifier un forfait
+- Supprimer un forfait
+- Navigation sans rechargement (SPA)
+- Affichage dynamique des images
+- Messages d’erreur et de succès avec fermeture
+- Interface responsive
 
 ---
 
