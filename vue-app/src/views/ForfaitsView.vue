@@ -1,33 +1,26 @@
 <template>
   <section>
-    <h2 class="mb-6 text-3xl font-bold">Gestion des forfaits</h2>
+    <h2 class="text-3xl font-bold mb-6">Gestion des forfaits</h2>
 
+    <!-- MESSAGE SUCCÈS -->
     <div
       v-if="message"
-      class="mb-4 rounded-lg bg-green-100 px-4 py-3 text-green-800 flex justify-between items-center"
+      class="alert alert-success d-flex justify-content-between align-items-center"
     >
       <span>{{ message }}</span>
-
-      <button
-        @click="message = ''"
-        class="ml-4 text-xl font-bold cursor-pointer transition hover:scale-110 hover:text-green-600"
-      >
-        ×
-      </button>
+      <button @click="message = ''" class="btn-close cursor-pointer"></button>
     </div>
 
+    <!-- MESSAGE ERREUR -->
     <div
       v-if="errorMessage"
-      class="mb-4 rounded-lg bg-red-100 px-4 py-3 text-red-800 flex justify-between items-center"
+      class="alert alert-danger d-flex justify-content-between align-items-center"
     >
       <span>{{ errorMessage }}</span>
-
       <button
         @click="errorMessage = ''"
-        class="ml-4 text-xl font-bold cursor-pointer transition hover:scale-110 hover:text-red-600"
-      >
-        ×
-      </button>
+        class="btn-close cursor-pointer"
+      ></button>
     </div>
 
     <ForfaitForm
@@ -50,11 +43,7 @@ import ForfaitForm from "../components/ForfaitForm.vue";
 import ForfaitList from "../components/ForfaitList.vue";
 
 export default {
-  name: "ForfaitsView",
-  components: {
-    ForfaitForm,
-    ForfaitList,
-  },
+  components: { ForfaitForm, ForfaitList },
   data() {
     return {
       forfaits: [],
@@ -67,58 +56,41 @@ export default {
     this.fetchForfaits();
   },
   methods: {
-    clearMessages() {
-      this.message = "";
-      this.errorMessage = "";
-    },
     async fetchForfaits() {
       try {
-        const response = await api.get("/forfaits");
-        this.forfaits = response.data;
-      } catch (error) {
-        console.error("Erreur fetchForfaits:", error);
-        this.errorMessage = "Impossible de charger les forfaits.";
+        const res = await api.get("/forfaits");
+        this.forfaits = res.data;
+      } catch (err) {
+        this.errorMessage = "Erreur de chargement";
       }
     },
     async saveForfait(forfait) {
-      this.clearMessages();
-
       try {
         if (forfait.id) {
           await api.put(`/forfaits/${forfait.id}`, forfait);
-          this.message = "Forfait modifié avec succès.";
+          this.message = "Modifié avec succès";
         } else {
           await api.post("/forfaits", forfait);
-          this.message = "Forfait ajouté avec succès.";
+          this.message = "Ajouté avec succès";
         }
-
         this.selectedForfait = null;
-        await this.fetchForfaits();
-      } catch (error) {
-        console.error("Erreur saveForfait:", error);
-        this.errorMessage = "Erreur lors de l’enregistrement du forfait.";
+        this.fetchForfaits();
+      } catch {
+        this.errorMessage = "Erreur lors de l’enregistrement";
       }
     },
-    editForfait(forfait) {
-      this.clearMessages();
-      this.selectedForfait = { ...forfait };
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    editForfait(f) {
+      this.selectedForfait = { ...f };
     },
     async deleteForfait(id) {
-      this.clearMessages();
-
-      const confirmation = window.confirm(
-        "Voulez-vous vraiment supprimer ce forfait ?",
-      );
-      if (!confirmation) return;
+      if (!confirm("Supprimer ce forfait ?")) return;
 
       try {
         await api.delete(`/forfaits/${id}`);
-        this.message = "Forfait supprimé avec succès.";
-        await this.fetchForfaits();
-      } catch (error) {
-        console.error("Erreur deleteForfait:", error);
-        this.errorMessage = "Erreur lors de la suppression du forfait.";
+        this.message = "Supprimé";
+        this.fetchForfaits();
+      } catch {
+        this.errorMessage = "Erreur suppression";
       }
     },
     cancelEdit() {

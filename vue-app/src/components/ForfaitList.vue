@@ -1,46 +1,31 @@
 <template>
   <div>
-    <h3 class="mb-4 text-2xl font-bold">Liste des forfaits</h3>
+    <h3 class="text-2xl font-bold mb-4">Liste des forfaits</h3>
 
-    <div
-      v-if="!forfaits || forfaits.length === 0"
-      class="rounded-2xl bg-white p-6 text-center shadow"
-    >
-      Aucun forfait disponible pour le moment.
+    <div v-if="forfaits.length === 0" class="alert alert-info">
+      Aucun forfait disponible
     </div>
 
-    <div v-else class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div
-        v-for="forfait in forfaits"
-        :key="forfait.id"
-        class="overflow-hidden rounded-2xl bg-white shadow"
+        v-for="f in forfaits"
+        :key="f.id"
+        class="bg-white rounded-xl shadow overflow-hidden"
       >
-        <img
-          :src="forfait.image"
-          :alt="forfait.nom"
-          class="h-48 w-full object-cover"
-        />
+        <img :src="f.image" class="w-full h-48 object-cover" />
 
         <div class="p-4">
-          <h4 class="mb-2 text-xl font-bold">{{ forfait.nom }}</h4>
-          <p class="mb-2 text-slate-600">{{ forfait.description }}</p>
-          <p class="mb-1 font-semibold">Catégorie : {{ forfait.categorie }}</p>
-          <p class="mb-4 text-lg font-bold text-blue-700">
-            {{ forfait.prix }} $
-          </p>
+          <h4 class="text-xl font-bold">{{ f.nom }}</h4>
+          <p class="text-gray-600">{{ f.description }}</p>
+          <p class="font-semibold mt-2">{{ f.prix }} $</p>
+          <p class="text-sm">{{ f.categorie }}</p>
 
-          <div class="flex gap-3">
-            <button
-              @click="$emit('edit', forfait)"
-              class="rounded-lg bg-yellow-500 px-4 py-2 text-white"
-            >
+          <div class="flex gap-2 mt-3">
+            <button @click="$emit('edit', f)" class="btn btn-warning">
               Modifier
             </button>
 
-            <button
-              @click="$emit('delete', forfait.id)"
-              class="rounded-lg bg-red-600 px-4 py-2 text-white"
-            >
+            <button @click="$emit('delete', f.id)" class="btn btn-danger">
               Supprimer
             </button>
           </div>
@@ -52,12 +37,6 @@
 
 <script>
 export default {
-  name: "ForfaitList",
-  props: {
-    forfaits: {
-      type: Array,
-      required: true,
-    },
-  },
+  props: ["forfaits"],
 };
 </script>

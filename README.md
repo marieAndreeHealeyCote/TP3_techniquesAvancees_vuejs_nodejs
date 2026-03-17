@@ -15,7 +15,7 @@ L’application permet de gérer des forfaits touristiques grâce à un système
 - Vue.js (Vite)
 - Vue Router
 - Axios
-- Tailwind CSS
+- Tailwind CSS et Boostrap CSS
 
 ### Backend
 
@@ -76,7 +76,7 @@ server.js
 ### 1. Cloner le projet
 
 ```bash
-git clone [LIEN_DU_REPO]
+git clone https://github.com/marieAndreeHealeyCote/TP3_techniquesAvancees_vuejs_nodejs.git
 cd projet-agence
 ```
 

@@ -7,23 +7,36 @@
           <h1 class="text-xl font-bold">Agence de Voyages</h1>
         </div>
 
-        <nav class="flex gap-4">
-          <router-link to="/" class="hover:underline">Accueil</router-link>
-          <router-link to="/forfaits" class="hover:underline"
-            >Forfaits</router-link
+        <nav class="flex gap-6">
+          <router-link
+            to="/"
+            class="text-white no-underline transition duration-200 hover:text-yellow-300 hover:font-semibold"
           >
-          <router-link to="/apropos" class="hover:underline"
-            >À propos</router-link
+            Accueil
+          </router-link>
+
+          <router-link
+            to="/forfaits"
+            class="text-white no-underline transition duration-200 hover:text-yellow-300 hover:font-semibold"
           >
+            Forfaits
+          </router-link>
+
+          <router-link
+            to="/apropos"
+            class="text-white no-underline transition duration-200 hover:text-yellow-300 hover:font-semibold"
+          >
+            À propos
+          </router-link>
         </nav>
       </div>
     </header>
 
-    <main class="grow px-4 py-8">
+    <main class="flex-grow container py-4">
       <router-view />
     </main>
-    <footer class="bg-gray-800 text-white py-6 mt-auto">
-      <div class="flex justify-center gap-6">
+    <footer class="bg-gray-500 text-white py-6 mt-auto">
+      <div class="flex justify-center gap-6 text-xl">
         <a href="https://www.facebook.com" target="_blank">
           <img
             src="@/assets/icons/facebook.png"
