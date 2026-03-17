@@ -1,85 +1,52 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div class="min-h-screen flex flex-col bg-slate-100 text-slate-800">
+    <header class="bg-blue-700 text-white">
+      <div class="flex items-center justify-between px-4 py-4">
+        <div class="flex items-center gap-3">
+          <img src="@/assets/images/logo.png" class="h-10" />
+          <h1 class="text-xl font-bold">Agence de Voyages</h1>
+        </div>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+        <nav class="flex gap-4">
+          <router-link to="/" class="hover:underline">Accueil</router-link>
+          <router-link to="/forfaits" class="hover:underline"
+            >Forfaits</router-link
+          >
+          <router-link to="/apropos" class="hover:underline"
+            >À propos</router-link
+          >
+        </nav>
+      </div>
+    </header>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+    <main class="grow px-4 py-8">
+      <router-view />
+    </main>
+    <footer class="bg-gray-800 text-white py-6 mt-auto">
+      <div class="flex justify-center gap-6">
+        <a href="https://www.facebook.com" target="_blank">
+          <img
+            src="@/assets/icons/facebook.png"
+            class="h-6 cursor-pointer hover:scale-110 transition"
+          />
+        </a>
 
-  <RouterView />
+        <a href="https://www.instagram.com" target="_blank">
+          <img
+            src="@/assets/icons/instagram.png"
+            class="h-6 cursor-pointer hover:scale-110 transition"
+          />
+        </a>
+
+        <a href="https://www.twitter.com" target="_blank">
+          <img
+            src="@/assets/icons/twitter.png"
+            class="h-6 cursor-pointer hover:scale-110 transition"
+          />
+        </a>
+      </div>
+
+      <p class="text-center text-sm mt-4">© 2026 Agence de Voyages</p>
+    </footer>
+  </div>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
